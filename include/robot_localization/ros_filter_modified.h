@@ -503,6 +503,12 @@ template<class T> class RosFilterModified
     //! @brief tf frame name that is the parent frame of the transform that this node will calculate and broadcast.
     //!
     std::string worldFrameId_;
+
+    ros::Subscriber cmd_vel_sub;
+
+    void cmdVelCallback(const geometry_msgs::Twist& cmd_vel);
+
+    geometry_msgs::Twist cmd_vel;
 };
 
 }  // namespace RobotLocalization
