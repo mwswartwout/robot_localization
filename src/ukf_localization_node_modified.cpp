@@ -30,21 +30,26 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef ROBOT_LOCALIZATION_ROS_FILTER_TYPES_H
-#define ROBOT_LOCALIZATION_ROS_FILTER_TYPES_H
+#include "robot_localization/ros_filter_types.h"
 
-#include "robot_localization/ros_filter.h"
-#include "robot_localization/ros_filter_modified.h"
-#include "robot_localization/ekf.h"
-#include "robot_localization/ukf.h"
+#include <ros/ros.h>
 
-namespace RobotLocalization
+#include <vector>
+
+int main(int argc, char **argv)
 {
+  ros::init(argc, argv, "ukf_navigation_node");
+  ros::NodeHandle nhLocal("~");
 
-typedef RosFilter<Ekf> RosEkf;
-typedef RosFilter<Ukf> RosUkf;
-typedef RosFilterModified<Ekf> RosEkfModified;
-typedef RosFilterModified<Ukf> RosUkfModified;
+  std::vector<double> args(3, 0);
+
+  nhLocal.param("alpha", args[0], 0.001);
+  nhLocal.param("kappa", args[1], 0.0);
+  nhLocal.param("beta", args[2], 2.0);
+
+  RobotLocalization::RosUkfModified ukf(args);
+
+  ukf.run();
+
+  return 0;
 }
-
-#endif  // ROBOT_LOCALIZATION_ROS_FILTER_TYPES_H

@@ -65,35 +65,10 @@
 #include <string>
 #include <vector>
 
+#include <robot_localization/ros_filter.h>
+
 namespace RobotLocalization
 {
-
-struct CallbackData
-{
-  CallbackData(const std::string &topicName,
-               const std::vector<int> &updateVector,
-               const int updateSum,
-               const bool differential,
-               const bool relative,
-               const double rejectionThreshold) :
-    topicName_(topicName),
-    updateVector_(updateVector),
-    updateSum_(updateSum),
-    differential_(differential),
-    relative_(relative),
-    rejectionThreshold_(rejectionThreshold)
-  {
-  }
-
-  std::string topicName_;
-  std::vector<int> updateVector_;
-  int updateSum_;
-  bool differential_;
-  bool relative_;
-  double rejectionThreshold_;
-};
-
-typedef std::priority_queue<Measurement, std::vector<Measurement>, Measurement> MeasurementQueue;
 
 template<class T> class RosFilterModified
 {

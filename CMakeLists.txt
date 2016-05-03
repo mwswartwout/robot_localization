@@ -99,6 +99,8 @@ add_dependencies(navsat_transform robot_localization_gencpp)
 # Executables
 add_executable(ekf_localization_node src/ekf_localization_node.cpp)
 add_executable(ukf_localization_node src/ukf_localization_node.cpp)
+add_executable(ekf_localization_node_modified src/ekf_localization_node_modified.cpp)
+add_executable(ukf_localization_node_modified src/ukf_localization_node_modified.cpp)
 add_executable(navsat_transform_node src/navsat_transform_node.cpp)
 
 # Linking
@@ -111,6 +113,8 @@ target_link_libraries(ros_filter ekf ukf ros_filter_utilities ${catkin_LIBRARIES
 target_link_libraries(ros_filter_modified ekf ukf ros_filter_utilities ${catkin_LIBRARIES} ${EIGEN3_LIBRARIES})
 target_link_libraries(ekf_localization_node ros_filter ${catkin_LIBRARIES})
 target_link_libraries(ukf_localization_node ros_filter ${catkin_LIBRARIES})
+target_link_libraries(ekf_localization_node_modified ros_filter_modified ${catkin_LIBRARIES})
+target_link_libraries(ukf_localization_node_modified ros_filter_modified ${catkin_LIBRARIES})
 target_link_libraries(navsat_transform filter_utilities ros_filter_utilities ${catkin_LIBRARIES} ${EIGEN3_LIBRARIES})
 target_link_libraries(navsat_transform_node navsat_transform ${catkin_LIBRARIES})
 
