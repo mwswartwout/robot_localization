@@ -76,7 +76,7 @@ namespace RobotLocalization
 
         diagnosticUpdater_.setHardwareID("none");
 
-        cmd_vel_sub = nh_.subscribe("cmd_vel", 1, &RosFilterModified<T>::cmdVelCallback, this);
+        cmd_vel_sub = nh_.subscribe("mobile_base/commands/velocity", 1, &RosFilterModified<T>::cmdVelCallback, this);
     }
 
     template<typename T>
